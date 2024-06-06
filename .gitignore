@@ -12,6 +12,7 @@ node_modules
 dist
 dist-ssr
 *.local
+.eslintcache
 
 # Env
 .env
@@ -26,3 +27,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+build-storybook.log
