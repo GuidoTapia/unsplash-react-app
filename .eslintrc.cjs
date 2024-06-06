@@ -9,6 +9,7 @@ module.exports = {
     'plugin:eslint-comments/recommended',
     'plugin:react/recommended',
     'plugin:jest/recommended',
+    'plugin:storybook/recommended',
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
@@ -27,6 +28,7 @@ module.exports = {
     'no-unexpected-multiline': 'warn',
     'no-undef': 'warn',
     'no-console': 'warn',
+    'react/react-in-jsx-scope': 'off',
     quotes: ['error', 'single'],
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'import/order': [
@@ -41,5 +43,10 @@ module.exports = {
         allowSingleExtends: true,
       },
     ],
+  },
+  settings: {
+    react: {
+      version: 'detect',
+    },
   },
 }
