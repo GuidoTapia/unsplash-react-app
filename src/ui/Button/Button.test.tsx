@@ -14,5 +14,7 @@ test('Button component example test', async () => {
 
   expect(button).toHaveTextContent(buttonLabel)
 
+  expect(onClick).toHaveBeenCalledTimes(0)
   await userEvent.click(button)
+  expect(onClick).toHaveBeenCalledTimes(1)
 })
