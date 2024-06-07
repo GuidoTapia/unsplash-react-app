@@ -17,7 +17,6 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const Button = ({ variant = 'primary', size = 'md', label, ...props }: ButtonProps) => {
-  props.onClick
   return (
     <button
       type="button"
