@@ -5,10 +5,10 @@ import { Button } from './Button'
 
 const onClick = jest.fn()
 
-const buttonLabel= "Test"
+const buttonLabel = 'Test'
 
 test('Button component example test', async () => {
-  render(<Button label={buttonLabel} data-testid="test-button" onClick={onClick}/>)
+  render(<Button label={buttonLabel} data-testid="test-button" onClick={onClick} />)
 
   const button = screen.getByTestId('test-button')
 

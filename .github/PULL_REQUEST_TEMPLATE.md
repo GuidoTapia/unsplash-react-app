@@ -18,8 +18,11 @@ Please delete options that are not relevant.
 
 Please describe the tests that you ran to verify your changes. Provide instructions so we can reproduce. Please also list any relevant details for your test configuration
 
-- [ ] Test A
-- [ ] Test B
+- [ ] Linter Validations
+- [ ] Commit Messages
+- [ ] Unit tests
+- [ ] End to end tests
+- [ ] Other Tests (describe them or remove this line)
 
 # Checklist:
 
