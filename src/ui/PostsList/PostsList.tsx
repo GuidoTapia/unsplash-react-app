@@ -1,5 +1,5 @@
-import { Post } from '../../../shared/types/post'
-import { PhotoPreview } from '../../../ui/PhotoPreview'
+import { Post } from '../../shared/types/post'
+import { PhotoPreview } from '../PhotoPreview'
 import './posts-list.css'
 
 interface PostsListProps {

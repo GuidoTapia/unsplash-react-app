@@ -1,3 +1,4 @@
+import { ReactNode } from 'react'
 import './photo-preview.css'
 import { PhotoPreviewFooter } from './PhotoPreviewFooter'
 
@@ -9,7 +10,7 @@ interface PhotoPreviewProps {
   tags: string[]
 }
 
-export const PhotoPreview = ({ src, author, date, tags, alt }: PhotoPreviewProps) => {
+export const PhotoPreview = ({ src, author, date, tags, alt }: PhotoPreviewProps): ReactNode => {
   return (
     <div className="photo-preview-container" data-testid="photo-preview-container" id="photo-preview-container">
       <img src={src} className="photo-src" data-testid="photo-src" id="photo-src" alt={alt} />

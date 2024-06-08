@@ -1,0 +1,13 @@
+.search-tag {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 600px;
+}
+
+.search-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}

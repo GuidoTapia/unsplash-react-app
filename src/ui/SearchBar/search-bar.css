@@ -1,0 +1,30 @@
+.search-bar-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 16px;
+}
+
+.search-bar {
+  width: 100%;
+  font-weight: 300;
+  border: 1px solid silver;
+  color: black;
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+  display: inline-block;
+  height: 32px;
+  font-size: 14px;
+  padding: 0px 8px;
+  letter-spacing: 1px;
+  caret-color: gray;
+}
+
+.search-bar::placeholder {
+  color: silver;
+}
+
+.search-bar:focus {
+  border: 1px solid skyblue;
+}

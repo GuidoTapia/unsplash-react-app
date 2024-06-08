@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
+import { AllTheProviders } from '../../../shared/tests'
 import { PhotoPreviewFooter } from './PhotoPreviewFooter'
 
 const author = 'Test Author'
@@ -8,7 +9,11 @@ const date = 'June 6, 2024'
 test('PhotoPreviewFooter component render optimal case', async () => {
   const tags = Array.from(Array(3).keys()).map((value) => `test-${value}`)
 
-  render(<PhotoPreviewFooter author={author} date={date} tags={tags} />)
+  render(
+    <AllTheProviders>
+      <PhotoPreviewFooter author={author} date={date} tags={tags} />
+    </AllTheProviders>,
+  )
 
   expect(screen.getByTestId('photo-preview-footer-container')).toBeInTheDocument()
 
@@ -24,7 +29,11 @@ test('PhotoPreviewFooter component render optimal case', async () => {
 test('PhotoPreviewFooter tags excess', async () => {
   const tags = Array.from(Array(10).keys()).map((value) => `test-${value}`)
 
-  render(<PhotoPreviewFooter author={author} date={date} tags={tags} />)
+  render(
+    <AllTheProviders>
+      <PhotoPreviewFooter author={author} date={date} tags={tags} />
+    </AllTheProviders>,
+  )
 
   expect(screen.queryAllByRole('button')).toHaveLength(3)
 

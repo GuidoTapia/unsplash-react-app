@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
+import { AllTheProviders } from '../../shared/tests'
 import { PhotoPreview } from './PhotoPreview'
 
 const author = 'Test Author'
@@ -10,7 +11,11 @@ const srcImg =
 test('PhotoPreview component render optimal case', async () => {
   const tags = Array.from(Array(3).keys()).map((value) => `test-${value}`)
 
-  render(<PhotoPreview author={author} date={date} tags={tags} src={srcImg} />)
+  render(
+    <AllTheProviders>
+      <PhotoPreview author={author} date={date} tags={tags} src={srcImg} />
+    </AllTheProviders>,
+  )
 
   expect(screen.getByTestId('photo-preview-container')).toBeInTheDocument()
 
@@ -28,7 +33,11 @@ test('PhotoPreview component render optimal case', async () => {
 test('PhotoPreview tags excess', async () => {
   const tags = Array.from(Array(10).keys()).map((value) => `test-${value}`)
 
-  render(<PhotoPreview author={author} date={date} tags={tags} src={srcImg} />)
+  render(
+    <AllTheProviders>
+      <PhotoPreview author={author} date={date} tags={tags} src={srcImg} />
+    </AllTheProviders>,
+  )
 
   expect(screen.queryAllByRole('button')).toHaveLength(3)
 
