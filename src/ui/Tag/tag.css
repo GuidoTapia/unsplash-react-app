@@ -1,7 +1,5 @@
 .tag {
   font-weight: 300;
-  border: 1px solid white;
-  color: white;
   border-radius: 8px;
   background-color: transparent;
   cursor: pointer;
@@ -12,7 +10,22 @@
   letter-spacing: 1px;
 }
 
-.tag:hover {
+.tag--dark {
+  border: 1px solid black;
+  color: black;
+}
+
+.tag--light {
+  border: 1px solid white;
+  color: white;
+}
+
+.tag--light:hover {
   border: 1px solid silver;
+  color: silver;
+}
+
+.tag--dark:hover {
+  border: 1px solid gray;
   color: silver;
 }

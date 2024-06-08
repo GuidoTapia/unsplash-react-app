@@ -1,10 +1,15 @@
 import { render, screen, within } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { mockPosts } from '../../../shared/mock-data/posts'
+import { mockPosts } from '../../shared/mock-data/posts'
+import { AllTheProviders } from '../../shared/tests'
 import { PostsList } from './PostsList'
 
 test('PostsList render with mocked data', async () => {
-  render(<PostsList posts={mockPosts} />)
+  render(
+    <AllTheProviders>
+      <PostsList posts={mockPosts} />
+    </AllTheProviders>,
+  )
 
   expect(screen.getByTestId('posts-list-container')).toBeInTheDocument()
 
@@ -33,7 +38,11 @@ test('PostsList render with random data', async () => {
     () => mockPosts[Math.round(Math.random() * 9)],
   )
 
-  render(<PostsList posts={randomMock} />)
+  render(
+    <AllTheProviders>
+      <PostsList posts={randomMock} />
+    </AllTheProviders>,
+  )
 
   expect(screen.getByTestId('posts-list-container')).toBeInTheDocument()
 
