@@ -1,0 +1,19 @@
+.layout {
+  width: 100vw;
+  height: 100vh;
+  background-color: #f0f0f0;
+  position: relative;
+  overflow: none;
+}
+
+.content {
+  padding: 24px 64px;
+  margin-top: 64px;
+  overflow: scroll;
+}
+
+h2 {
+  font-weight: 700;
+  font-size: 20px;
+  color: #1a1a1a;
+}
