@@ -6,7 +6,7 @@
 
 .photo-src {
   border: 0px;
-  display: inline-block;
+  display: block;
   width: 100%;
   padding: 0px;
 }
