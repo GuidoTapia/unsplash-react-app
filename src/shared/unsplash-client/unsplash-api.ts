@@ -7,6 +7,8 @@ import { getFormattedUrl } from './get-formatted-url'
 
 const unsplashApiUrl = import.meta.env.VITE_UNSPLASH_API_URL
 
+const RAMDOM_POST_SIZE = 30
+
 async function getPhotos(params: Record<string, string | number>) {
   const url = getFormattedUrl(`${unsplashApiUrl}/photos`, params)
   const response = await fetch(url, {
@@ -18,7 +20,7 @@ async function getPhotos(params: Record<string, string | number>) {
 }
 
 async function getRandomPhotos() {
-  const url = getFormattedUrl(`${unsplashApiUrl}/photos/random`, { count: 20 })
+  const url = getFormattedUrl(`${unsplashApiUrl}/photos/random`, { count: RAMDOM_POST_SIZE })
   const response = await fetch(url, {
     method: 'GET',
     headers,
