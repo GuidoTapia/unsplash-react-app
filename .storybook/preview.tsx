@@ -1,6 +1,16 @@
+import React from 'react'
+import { AllTheProviders } from '../src/shared/tests'
 import '../src/index.css'
 /** @type { import('@storybook/react').Preview } */
+
 const preview = {
+  decorators: [
+    (Story) => (
+      <AllTheProviders>
+        <Story />
+      </AllTheProviders>
+    ),
+  ],
   parameters: {
     backgrounds: {
       default: 'gray',

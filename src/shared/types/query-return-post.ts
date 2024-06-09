@@ -1,12 +1,12 @@
 type Languages = 'en' | 'es' | string
 
-export interface Post {
+export interface QueryReturnPost {
   id: string
   slug: string
   alternative_slugs: Record<Languages, string | null>
-  created_at: Date
-  updated_at?: Date | null
-  promoted_at?: Date | null
+  created_at: string
+  updated_at?: string | null
+  promoted_at?: string | null
   width: number
   height: number
   color: string | null

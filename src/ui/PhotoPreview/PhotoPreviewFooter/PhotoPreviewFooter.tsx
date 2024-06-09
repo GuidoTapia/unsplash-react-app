@@ -1,10 +1,11 @@
 import { useNavigate } from 'react-router-dom'
 import { Tag } from '../../Tag'
 import './photo-preview-footer.css'
+import { formatDate } from '../../../shared/format-date'
 
 interface PhotoPreviewFooterProps {
   author: string
-  date: string
+  date: Date
   tags: string[]
 }
 
@@ -22,7 +23,7 @@ export const PhotoPreviewFooter = ({ author, date, tags }: PhotoPreviewFooterPro
           by <b>{author}</b>
         </div>
         <div data-testid="photo-preview-date" id="photo-preview-date">
-          Taken {date}
+          Taken on {formatDate(date)}
         </div>
       </div>
       <div className="tags-container">

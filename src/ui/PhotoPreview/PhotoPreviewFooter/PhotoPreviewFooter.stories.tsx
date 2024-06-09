@@ -11,7 +11,7 @@ export default {
   tags: ['autodocs'],
   argTypes: {
     author: 'Anonymous',
-    date: 'May 5, 2020',
+    date: new Date('May 5, 2020'),
     tags: ['tag 1', 'tag 2', 'tag 3'],
   },
   args: { onClick: fn() },
@@ -21,7 +21,7 @@ export default {
 export const Primary = {
   args: {
     author: 'Anonymous',
-    date: 'May 5, 2020',
+    date: new Date('May 5, 2020'),
     tags: ['tag 1', 'tag 2', 'tag 3'],
   },
 }
