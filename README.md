@@ -2,7 +2,8 @@
 
 ## Project Setup
 
-Once you downloaded this project first run `yarn intall` command to get all the needed dependencies
+Once you downloaded this project first run `yarn intall` command to get all the needed dependencies.
+
 You will also need to create an `.env` file using as reference `.env.example`, you can alse have multilpe .env files for different environements or modes, more info on https://vitejs.dev/guide/env-and-mode
 
 ## Running Project
