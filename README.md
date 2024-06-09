@@ -1,5 +1,7 @@
 # Unsplash React App
 
+This is a demo app build with react and unsplash API to show developer abilities as a FE/Web engineer.
+
 ## Project Setup
 
 Once you downloaded this project first run `yarn intall` command to get all the needed dependencies.
