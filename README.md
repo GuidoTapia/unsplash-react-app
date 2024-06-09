@@ -3,12 +3,17 @@
 ## Project Setup
 
 Once you downloaded this project first run `yarn intall` command to get all the needed dependencies
+You will also need to create an `.env` file using as reference `.env.example`, you can alse have multilpe .env files for different environements or modes, more info on https://vitejs.dev/guide/env-and-mode
 
 ## Running Project
 
 After install all the dependencies you should be able to run the project locally using the command `yarn dev`
 
 A local server will start running at `http://localhost:4000/` in case the port is available
+
+## App Demo
+
+https://github.com/GuidoTapia/unsplash-react-app/assets/31198370/c1122146-790c-41c5-a9c0-d91b8c8e1454
 
 ## Automated Tests
 
@@ -19,6 +24,10 @@ To run tests use the command `yarn test`
 
 This project include components workshop using storybook, which allows to see and document components in a isolated environement
 To run workshop use the command `yarn storybook` , a local server will start running at `http://localhost:6006/` in case the port is available
+
+Workshop running should looks like this:
+
+https://github.com/GuidoTapia/unsplash-react-app/assets/31198370/a2903422-3fb4-4fbd-ad20-8217a0447d9c
 
 ## Additional Validations
 
