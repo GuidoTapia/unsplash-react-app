@@ -4,7 +4,8 @@ import { AllTheProviders } from '../../../shared/tests'
 import { PhotoPreviewFooter } from './PhotoPreviewFooter'
 
 const author = 'Test Author'
-const date = 'June 6, 2024'
+const dateString = 'June 6, 2024'
+const date = new Date(dateString)
 
 test('PhotoPreviewFooter component render optimal case', async () => {
   const tags = Array.from(Array(3).keys()).map((value) => `test-${value}`)
@@ -18,7 +19,7 @@ test('PhotoPreviewFooter component render optimal case', async () => {
   expect(screen.getByTestId('photo-preview-footer-container')).toBeInTheDocument()
 
   expect(screen.queryAllByText(`${author}`)).toHaveLength(1)
-  expect(screen.queryAllByText(`Taken ${date}`)).toHaveLength(1)
+  expect(screen.queryAllByText(`Taken on ${dateString}`)).toHaveLength(1)
 
   expect(screen.queryAllByRole('button')).toHaveLength(3)
   tags.forEach((tag, index) => {

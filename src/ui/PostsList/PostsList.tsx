@@ -16,6 +16,8 @@ export const PostsList = ({ posts }: PostsListProps) => {
           tags={Object.keys(post.topic_submissions)}
           src={post.urls.regular}
           key={`${post.id}-${index}`}
+          width={post.width}
+          height={post.height}
         />
       ))}
     </div>

@@ -2,6 +2,7 @@ import { render, screen, within } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { mockPosts } from '../../shared/mock-data/posts'
 import { AllTheProviders } from '../../shared/tests'
+import { formatDate } from '../../shared/format-date'
 import { PostsList } from './PostsList'
 
 test('PostsList render with mocked data', async () => {
@@ -21,7 +22,7 @@ test('PostsList render with mocked data', async () => {
     expect(within(renderPost).getByTestId('photo-src')).toHaveAttribute('src', post.urls.regular)
 
     expect(within(renderPost).queryAllByText(`${post.user.name}`)).toHaveLength(1)
-    expect(within(renderPost).queryAllByText(`Taken ${post.created_at}`)).toHaveLength(1)
+    expect(within(renderPost).queryAllByText(`Taken on ${formatDate(post.created_at)}`)).toHaveLength(1)
 
     expect(within(renderPost).queryAllByRole('button').length).toBeLessThanOrEqual(3)
 
@@ -54,7 +55,7 @@ test('PostsList render with random data', async () => {
     expect(within(renderPost).getByTestId('photo-src')).toHaveAttribute('src', post.urls.regular)
 
     expect(within(renderPost).queryAllByText(`${post.user.name}`)).toHaveLength(1)
-    expect(within(renderPost).queryAllByText(`Taken ${post.created_at}`)).toHaveLength(1)
+    expect(within(renderPost).queryAllByText(`Taken on ${formatDate(post.created_at)}`)).toHaveLength(1)
 
     expect(within(renderPost).queryAllByRole('button').length).toBeLessThanOrEqual(3)
 
