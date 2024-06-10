@@ -17,7 +17,9 @@ A local server will start running at `http://localhost:4000/` in case the port i
 ## App Demo
 
 Current version of the app in `main` branch
+
 https://github.com/GuidoTapia/unsplash-react-app/assets/31198370/c1122146-790c-41c5-a9c0-d91b8c8e1454
+
 
 Proposed changes app, currently in `develop` branch and with an open PR(#8)
 Test App: https://66669fed00616e78823c53ee--sage-baklava-d521ed.netlify.app/
