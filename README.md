@@ -16,7 +16,13 @@ A local server will start running at `http://localhost:4000/` in case the port i
 
 ## App Demo
 
+Current version of the app in `main` branch
 https://github.com/GuidoTapia/unsplash-react-app/assets/31198370/c1122146-790c-41c5-a9c0-d91b8c8e1454
+
+Proposed changes app, currently in `develop` branch and with an open PR(#8)
+Test App: https://66669fed00616e78823c53ee--sage-baklava-d521ed.netlify.app/
+Demo Video:
+[![Unsplash React Demo](https://img.youtube.com/vi/IxjOXUHSBSU/0.jpg)](https://youtu.be/IxjOXUHSBSU)
 
 ## Automated Tests
 
@@ -41,3 +47,6 @@ This project includes linter tools to avoid different code styles, the availavle
 - `lint:all`: Run eslint over all the files to get warnings and errors
 - `format:check`: Run prettier over all the files to get warnings and errors
 - `format:write`: Run prettier over all the files to overwrite failing files if posible
+
+## About of Proposed changes
+They were made to improve app ui and show domain over styling and components libraries commonly used to reduce development time, They were kept on a different branch as an alternative, because of the understanding of how important is to follow as well as possible the requirements and how a better ui was not a must do, but could be a good to have
