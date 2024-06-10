@@ -1,38 +1,95 @@
-import { useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
+import { useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
+import { Button, Flex } from '@mantine/core'
+import { useInfiniteQuery } from '@tanstack/react-query'
 import { UnsplashApi } from '../../shared/unsplash-client'
-import { Loader } from '../../ui/Loader/Loader'
 import { PostsList } from '../../ui/PostsList'
-import './home.css'
 import { SearchBar } from '../../ui/SearchBar'
 
+const maxInfiniteLoads = import.meta.env.VITE_PHOTO_QUERIES_MAX_INFINITE_LOADS
+
 export const Home = () => {
-  const [search, setSearch] = useState<string>()
+  const [searchParams] = useSearchParams()
 
-  const { data: trendingData, isLoading: trendingIsLoading } = useQuery({
+  const search = searchParams.get('search')
+  const {
+    data: trendingData,
+    isFetching: trendingIsFetching,
+    fetchNextPage: trendingFetchNextPage,
+  } = useInfiniteQuery({
     queryKey: ['random'],
-    queryFn: UnsplashApi.getRandomPhotos,
+    queryFn: async ({ pageParam }) => UnsplashApi.getRandomPhotos({ page: pageParam }),
+    getNextPageParam: (lastPage) => lastPage.nextPage,
+    initialPageParam: 1,
+    refetchOnWindowFocus: false,
   })
 
-  const { data: searchData, isLoading: searchIsLoading } = useQuery({
+  const {
+    data: searchData,
+    isFetching: searchIsFetching,
+    fetchNextPage: searchFetchNextPage,
+  } = useInfiniteQuery({
+    enabled: Boolean(search && search.length),
     queryKey: ['search', search],
-    queryFn: async () => (search ? UnsplashApi.getBySearchTerm(search) : null),
+    queryFn: async ({ pageParam }) => UnsplashApi.getBySearchTerm({ searchTerm: search ?? '', page: pageParam }),
+    getNextPageParam: (lastPage) => lastPage?.nextPage,
+    initialPageParam: 1,
+    refetchOnWindowFocus: false,
   })
 
-  const onClickSearch = (searchValue: string) => {
-    setSearch(searchValue)
+  const trendingPosts = trendingData?.pages.flatMap((page) => page.results)
+  const searchPosts = searchData?.pages.flatMap((page) => page.results)
+
+  const onClickLoadMore = () => {
+    if (search) {
+      searchFetchNextPage()
+    } else {
+      trendingFetchNextPage()
+    }
   }
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const screenHeight = window.innerHeight
+      const scrollHeight = window.document.body.scrollHeight - screenHeight
+      const position = window.scrollY
+
+      if (scrollHeight - position < screenHeight) {
+        if (
+          !search &&
+          trendingData?.pages.length &&
+          trendingData.pages.length < maxInfiniteLoads &&
+          !trendingIsFetching
+        ) {
+          trendingFetchNextPage()
+        }
+        if (search && searchData?.pages.length && searchData?.pages.length < maxInfiniteLoads && !searchIsFetching) {
+          searchFetchNextPage()
+        }
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [trendingData?.pages.length, searchData?.pages.length, searchIsFetching, trendingIsFetching])
+
   return (
-    <div className="home">
-      <h2>Search Photos:</h2>
-      <SearchBar onClickSearch={onClickSearch} />
+    <Flex direction="column" gap="md">
+      <SearchBar />
       {search ? <h2>Results for: {search}</h2> : <h2>Trending Photos Right Now</h2>}
 
-      {search && searchData?.results ? <PostsList posts={searchData.results} /> : null}
-      {!search && trendingData ? <PostsList posts={trendingData} /> : null}
+      {search && searchPosts ? <PostsList posts={searchPosts} isLoading={searchIsFetching} /> : null}
+      {!search && trendingPosts ? <PostsList posts={trendingPosts} isLoading={trendingIsFetching} /> : null}
 
-      {(search && searchIsLoading) || (!search && trendingIsLoading) ? <Loader /> : null}
-    </div>
+      {!searchIsFetching && !trendingIsFetching ? (
+        <Flex w="100%" justify="center">
+          <Button w="33%" size="xl" variant="outline" onClick={onClickLoadMore}>
+            Load More
+          </Button>
+        </Flex>
+      ) : null}
+    </Flex>
   )
 }

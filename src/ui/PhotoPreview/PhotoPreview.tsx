@@ -1,30 +1,62 @@
-import { ReactNode } from 'react'
+import { useState } from 'react'
+import { AspectRatio, Box, Image } from '@mantine/core'
+import { useHover } from '@mantine/hooks'
+import { Post } from '../../shared/types/post'
+import { PhotoModal } from '../PhotoModal'
+import { PhotoPreviewOverlay } from './PhotoPreviewOverlay'
 import './photo-preview.css'
-import { PhotoPreviewFooter } from './PhotoPreviewFooter'
 
 interface PhotoPreviewProps {
-  src: string
-  alt?: string
-  width?: number
-  height?: number
-  author: string
-  date: Date
-  tags: string[]
+  post: Post
 }
 
-export const PhotoPreview = ({ src, author, date, tags, alt, width, height }: PhotoPreviewProps): ReactNode => {
+export const PhotoPreview = ({ post }: PhotoPreviewProps) => {
+  const { user, created_at, topic_submissions, urls, width, height, alt_description, links } = post
+
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const { hovered, ref } = useHover()
+
+  const onCloseModal = () => setIsModalOpen(false)
+
   return (
-    <div className="photo-preview-container" data-testid="photo-preview-container" id="photo-preview-container">
-      <img
-        src={src}
-        className="photo-src"
-        data-testid="photo-src"
-        id="photo-src"
-        alt={alt}
-        // needed hack for better ui, style should be avoided as possible when coding
-        style={{ aspectRatio: width && height ? width / height : undefined }}
-      />
-      <PhotoPreviewFooter author={author} date={date} tags={tags} />
-    </div>
+    <>
+      <Box
+        onClick={() => setIsModalOpen(true)}
+        data-testid="photo-preview-container"
+        id="photo-preview-container"
+        className="photo-preview-container"
+      >
+        <AspectRatio
+          ratio={width && height ? width / height : 1}
+          w={'100%'}
+          mx="auto"
+          pos="relative"
+          ref={ref}
+          m={0}
+          data-testid="photo-preview-aspect-ratio"
+          id="photo-preview-aspect-ratio"
+        >
+          <Image
+            src={urls.regular}
+            w="100%"
+            data-testid="photo-src"
+            id="photo-src"
+            alt={alt_description ?? undefined}
+            display="block"
+            radius="sm"
+          />
+          <PhotoPreviewOverlay
+            author={user.name}
+            date={created_at}
+            tags={Object.keys(topic_submissions)}
+            hovered={hovered}
+            authorProfileImage={user.profile_image.small}
+            unsplashLink={links.html}
+          />
+        </AspectRatio>
+      </Box>
+      {isModalOpen ? <PhotoModal post={post} onClose={onCloseModal} /> : null}
+    </>
   )
 }

@@ -1,10 +1,10 @@
 import { ReactNode } from 'react'
 import { fn } from '@storybook/test'
-import { PhotoPreviewFooter } from './PhotoPreviewFooter'
+import { PhotoPreviewOverlay } from './PhotoPreviewOverlay'
 
 export default {
-  title: 'Example/PhotoPreviewFooter',
-  component: PhotoPreviewFooter,
+  title: 'Example/PhotoPreviewOverlay',
+  component: PhotoPreviewOverlay,
   parameters: {
     layout: 'centered',
   },

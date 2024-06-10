@@ -5,6 +5,22 @@ import { AllTheProviders } from '../../shared/tests'
 import { formatDate } from '../../shared/format-date'
 import { PostsList } from './PostsList'
 
+beforeAll(() => {
+  Object.defineProperty(window, 'matchMedia', {
+    writable: true,
+    value: jest.fn().mockImplementation((query) => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: jest.fn(), // Deprecated
+      removeListener: jest.fn(), // Deprecated
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+      dispatchEvent: jest.fn(),
+    })),
+  })
+})
+
 test('PostsList render with mocked data', async () => {
   render(
     <AllTheProviders>
