@@ -18,6 +18,9 @@ A local server will start running at `http://localhost:4000/` in case the port i
 
 You can test the app in the next link: https://66669fed00616e78823c53ee--sage-baklava-d521ed.netlify.app/
 
+Demo App Video
+[![Unsplash React Demo](https://img.youtube.com/vi/IxjOXUHSBSU/0.jpg)](https://youtu.be/IxjOXUHSBSU)
+
 ## Automated Tests
 
 This project includes automated tests that must be succesful to merge new commits
