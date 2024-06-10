@@ -21,7 +21,7 @@ async function getPhotos(params: Record<string, string | number>) {
   return response.json()
 }
 
-async function getRandomPhotos(): Promise<Post[]> {
+async function getRandomPhotos({ page }: { page: number }): Promise<{ results: Post[]; nextPage: number }> {
   const url = getFormattedUrl(`${unsplashApiUrl}/photos/random`, { count: pageSize })
   const response = await fetch(url, {
     method: 'GET',
@@ -30,7 +30,7 @@ async function getRandomPhotos(): Promise<Post[]> {
 
   const responseJson = await response.json()
 
-  return responseJson.map((post: QueryReturnPost) => formatPost(post))
+  return { results: responseJson.map((post: QueryReturnPost) => formatPost(post)), nextPage: page + 1 }
 }
 
 async function getByTag(tag: string): Promise<{ results: Post[]; total: number; total_pages: number }> {
@@ -49,8 +49,14 @@ async function getByTag(tag: string): Promise<{ results: Post[]; total: number; 
   }
 }
 
-async function getBySearchTerm(searchTerm: string): Promise<{ results: Post[]; total: number; total_pages: number }> {
-  const url = getFormattedUrl(`${unsplashApiUrl}/search/photos`, { query: searchTerm, per_page: pageSize })
+async function getBySearchTerm({
+  searchTerm,
+  page,
+}: {
+  searchTerm: string
+  page: number
+}): Promise<{ results: Post[]; total: number; totalPages: number; nextPage: number }> {
+  const url = getFormattedUrl(`${unsplashApiUrl}/search/photos`, { query: searchTerm, page, per_page: pageSize })
   const response = await fetch(url, {
     method: 'GET',
     headers,
@@ -60,7 +66,8 @@ async function getBySearchTerm(searchTerm: string): Promise<{ results: Post[]; t
 
   return {
     total: responseJson.total as number,
-    total_pages: responseJson.total_pages as number,
+    totalPages: responseJson.total_pages as number,
+    nextPage: page + 1,
     results: responseJson.results.map((post: QueryReturnPost) => formatPost(post)),
   }
 }

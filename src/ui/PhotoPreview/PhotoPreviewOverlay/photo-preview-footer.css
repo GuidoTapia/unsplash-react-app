@@ -1,0 +1,5 @@
+.overlay-container {
+  background: radial-gradient(ellipse 100% 60%, #00000000, #000000ff);
+  top: 0px;
+  border-radius: 4px;
+}

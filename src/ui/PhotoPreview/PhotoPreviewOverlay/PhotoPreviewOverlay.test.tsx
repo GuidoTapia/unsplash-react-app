@@ -1,18 +1,33 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { AllTheProviders } from '../../../shared/tests'
-import { PhotoPreviewFooter } from './PhotoPreviewFooter'
+import { PhotoPreviewOverlay } from './PhotoPreviewOverlay'
 
-const author = 'Test Author'
-const dateString = 'June 6, 2024'
-const date = new Date(dateString)
+beforeAll(() => {
+  Object.defineProperty(window, 'matchMedia', {
+    writable: true,
+    value: jest.fn().mockImplementation((query) => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: jest.fn(), // Deprecated
+      removeListener: jest.fn(), // Deprecated
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+      dispatchEvent: jest.fn(),
+    })),
+  })
+})
 
-test('PhotoPreviewFooter component render optimal case', async () => {
+test('PhotoPreviewOverlay component render optimal case', async () => {
   const tags = Array.from(Array(3).keys()).map((value) => `test-${value}`)
+  const author = 'Test Author'
+  const dateString = 'June 6, 2024'
+  const date = new Date(dateString)
 
   render(
     <AllTheProviders>
-      <PhotoPreviewFooter author={author} date={date} tags={tags} />
+      <PhotoPreviewOverlay author={author} date={date} tags={tags} />
     </AllTheProviders>,
   )
 
@@ -27,12 +42,15 @@ test('PhotoPreviewFooter component render optimal case', async () => {
   })
 })
 
-test('PhotoPreviewFooter tags excess', async () => {
+test('PhotoPreviewOverlay tags excess', async () => {
   const tags = Array.from(Array(10).keys()).map((value) => `test-${value}`)
+  const author = 'Test Author'
+  const dateString = 'June 6, 2024'
+  const date = new Date(dateString)
 
   render(
     <AllTheProviders>
-      <PhotoPreviewFooter author={author} date={date} tags={tags} />
+      <PhotoPreviewOverlay author={author} date={date} tags={tags} />
     </AllTheProviders>,
   )
 

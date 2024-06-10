@@ -22,7 +22,7 @@ module.exports = {
     strict: ['error', 'never'],
     'prettier/prettier': ['error'],
     'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'warn',
+    'react-hooks/exhaustive-deps': 'off',
     'react/prop-types': 'off',
     'react/display-name': 'off',
     'no-unexpected-multiline': 'warn',
